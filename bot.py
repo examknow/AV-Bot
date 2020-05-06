@@ -156,7 +156,7 @@ while True:
   RECENTCHANGES = DATA['query']['recentchanges']
 
   for rc in RECENTCHANGES:
-      if str(rc['revid']) !> lastdiff:
+      if str(rc['revid']) < lastdiff:
         pass
       print(str(rc['title']) + ' with the comment: ' + str(rc['comment']))
       if str(rc['comment']) == 'reset':
