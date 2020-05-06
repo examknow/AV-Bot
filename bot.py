@@ -15,6 +15,9 @@ for line in configfile:
     flagpass = setting[1]
   if setting[0] == 'noflagpass':
     noflagpass = setting[1]
+  if setting[0] == 'spamwords':
+    spamwords = setting[1]
+    spamwords = spamwords.split(',')
 
 def warnUser(page, user):
   global username
