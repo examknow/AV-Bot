@@ -55,7 +55,7 @@ def warnUser(page, user):
       "title": "User talk:" + user,
       "token": CSRF_TOKEN,
       "format": "json",
-      "bot": true,
+      "bot": "true",
       "appendtext": "\n== {{subst:CURRENTMONTHNAME}} {{subst:CURRENTYEAR}} == \n{{subst:User:EkWikiBot/WarnVandal|" + page + "}}"
   }
 
