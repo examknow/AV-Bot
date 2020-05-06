@@ -1,5 +1,7 @@
 import requests
 
+lastdiff = 0
+
 configfile = open('config.csv', 'r')
 for line in configfile:
   setting = line.split(';')
@@ -133,29 +135,33 @@ def revertChange(page, user):
   print(DATA)
 
 
+while True:
+  S = requests.Session()
 
-S = requests.Session()
+  URL = "https://test.miraheze.org/w/api.php"
 
-URL = "https://test.miraheze.org/w/api.php"
+  PARAMS = {
+      "format": "json",
+      "rcprop": "title|ids|sizes|flags|user|comment",
+      "list": "recentchanges",
+      "action": "query",
+      "rctoponly": "true",
+      "rcdir": "newer"
+      
+  }
 
-PARAMS = {
-    "format": "json",
-    "rcprop": "title|ids|sizes|flags|user|comment",
-    "list": "recentchanges",
-    "action": "query",
-    "rclimit": "1"
-}
+  R = S.get(url=URL, params=PARAMS)
+  DATA = R.json()
 
-R = S.get(url=URL, params=PARAMS)
-DATA = R.json()
+  RECENTCHANGES = DATA['query']['recentchanges']
 
-RECENTCHANGES = DATA['query']['recentchanges']
-
-for rc in RECENTCHANGES:
-    print(str(rc['title']) + ' with the comment: ' + str(rc['comment']))
-    if str(rc['comment']) == 'reset':
-        print("ALERT! Vandalism found on " + str(rc['title']))
-        rolluser = str(rc['user'])
-        rollpage = str(rc['title'])
-        revertChange(rollpage, rolluser)
-        warnUser(rollpage, rolluser)
+  for rc in RECENTCHANGES:
+      if str(rc['revid']) !> lastdiff:
+        pass
+      print(str(rc['title']) + ' with the comment: ' + str(rc['comment']))
+      if str(rc['comment']) == 'reset':
+          print("ALERT! Vandalism found on " + str(rc['title']))
+          rolluser = str(rc['user'])
+          rollpage = str(rc['title'])
+          revertChange(rollpage, rolluser)
+          warnUser(rollpage, rolluser)
