@@ -51,7 +51,7 @@ def revertChange(page, user):
 
   CSRF_TOKEN = DATA["query"]["tokens"]["csrftoken"]
 
-  R = S.post(URL, data=PARAMS_4)
+  R = S.post(URL, data=PARAMS_3)
 
   PARAMS_4 = {
       "action": "query",
@@ -60,7 +60,7 @@ def revertChange(page, user):
       "format": "json"
   }
 
-  R = S.get(url=URL, params=PARAMS_5)
+  R = S.get(url=URL, params=PARAMS_4)
   DATA = R.json()
 
   ROLLBACK_TOKEN = DATA['query']['tokens']['rollbacktoken']
@@ -74,7 +74,7 @@ def revertChange(page, user):
       "token": ROLLBACK_TOKEN,
   }
 
-  R = S.post(URL, data=PARAMS_6)
+  R = S.post(URL, data=PARAMS_5)
   DATA = R.json()
 
   print(DATA)
