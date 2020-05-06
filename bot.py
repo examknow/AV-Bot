@@ -1,6 +1,9 @@
+import time
+import logging
 import requests
 
 lastdiff = 0
+logging.basicConfig(filename='wikibot.log',level=logging.DEBUG)
 
 configfile = open('config.csv', 'r')
 for line in configfile:
@@ -160,10 +163,11 @@ while True:
       revid = str(rc['revid'])
       if revid == lastdiff:
         pass
-      print(str(rc['title']) + ' with the comment: ' + str(rc['comment']))
       lastdiff = str(rc['revid'])
-      if str(rc['comment']) == 'reset':
-          print("ALERT! Vandalism found on " + str(rc['title']))
+      if str(rc['comment']) in spamwords:
+          t = time.localtime()
+          curtime = time.strftime("%H:%M:%S", t)
+          logging.warning('[' + curtime + '] RevID:' + str(rc['revid']) + ' Page: ' + str(rc['title']) + ' Summary: ' + str(rc['comment']) + ' User: ' + str(rc['user']))
           rolluser = str(rc['user'])
           rollpage = str(rc['title'])
           revertChange(rollpage, rolluser)
