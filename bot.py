@@ -158,7 +158,7 @@ while True:
 
   for rc in RECENTCHANGES:
       revid = str(rc['revid'])
-      if revid < lastdiff:
+      if revid == lastdiff:
         pass
       print(str(rc['title']) + ' with the comment: ' + str(rc['comment']))
       lastdiff = str(rc['revid'])
