@@ -155,9 +155,10 @@ while True:
   DATA = R.json()
 
   RECENTCHANGES = DATA['query']['recentchanges']
+  revid = str(rc['revid'])
 
   for rc in RECENTCHANGES:
-      if str(rc['revid']) == lastdiff:
+      if revid < lastdiff:
         pass
       print(str(rc['title']) + ' with the comment: ' + str(rc['comment']))
       lastdiff = str(rc['revid'])
