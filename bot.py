@@ -11,6 +11,59 @@ for line in configfile:
   if setting[0] == 'noflagpass':
     noflagpass = setting[1]
 
+def warnUser(page, user):
+  global username
+  global flagpass
+  global noflagpass
+  S = requests.Session()
+
+  URL = "https://test.miraheze.org/w/api.php"
+  PARAMS_0 = {
+      "action": "query",
+      "meta": "tokens",
+      "type": "login",
+      "format": "json"
+  }
+
+  R = S.get(url=URL, params=PARAMS_0)
+  DATA = R.json()
+
+  LOGIN_TOKEN = DATA['query']['tokens']['logintoken']
+  PARAMS_1 = {
+      "action": "login",
+      "lgname": username,
+      "lgpassword": flagpass,
+      "lgtoken": LOGIN_TOKEN,
+      "format": "json"
+  }
+
+  R = S.post(URL, data=PARAMS_1)
+
+  PARAMS_2 = {
+      "action": "query",
+      "meta": "tokens",
+      "format": "json"
+  }
+
+  R = S.get(url=URL, params=PARAMS_2)
+  DATA = R.json()
+
+  CSRF_TOKEN = DATA['query']['tokens']['csrftoken']
+
+  PARAMS_3 = {
+      "action": "edit",
+      "title": "User talk:" + user,
+      "token": CSRF_TOKEN,
+      "format": "json",
+      "bot": true,
+      "appendtext": "{{User:EkWikiBot/WarnVandal|" + page + "}}"
+  }
+
+  R = S.post(URL, data=PARAMS_3)
+  DATA = R.json()
+
+  print(DATA)
+
 def revertChange(page, user):
   global username
   global flagpass
@@ -105,3 +158,4 @@ for rc in RECENTCHANGES:
         rolluser = str(rc['user'])
         rollpage = str(rc['title'])
         revertChange(rollpage, rolluser)
+        warnUser(rollpage, rolluser)
