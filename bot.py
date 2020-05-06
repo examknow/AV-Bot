@@ -143,7 +143,7 @@ PARAMS = {
     "rcprop": "title|ids|sizes|flags|user|comment",
     "list": "recentchanges",
     "action": "query",
-    "rclimit": "3"
+    "rclimit": "1"
 }
 
 R = S.get(url=URL, params=PARAMS)
