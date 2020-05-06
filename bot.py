@@ -56,7 +56,7 @@ def warnUser(page, user):
       "token": CSRF_TOKEN,
       "format": "json",
       "bot": true,
-      "appendtext": "{{User:EkWikiBot/WarnVandal|" + page + "}}"
+      "appendtext": "\n== {{subst:CURRENTMONTHNAME}} {{subst:CURRENTYEAR}} == \n{{subst:User:EkWikiBot/WarnVandal|" + page + "}}"
   }
 
   R = S.post(URL, data=PARAMS_3)
