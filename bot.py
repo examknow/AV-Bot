@@ -146,7 +146,7 @@ while True:
       "list": "recentchanges",
       "action": "query",
       "rctoponly": "true",
-      "rcdir": "newer",
+      "rcdir": "older",
       "rctype": "edit"
       
   }
