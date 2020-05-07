@@ -229,4 +229,4 @@ while True:
           comment = str(rc['comment'])
           revertChange(rollpage, rolluser)
           warnUser(rollpage, rolluser)
-          vandalMsg(rollpage, rolluser)
+          irc.vandalMsg(rollpage, rolluser)
