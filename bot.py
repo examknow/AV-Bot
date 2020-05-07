@@ -178,7 +178,8 @@ while True:
       "action": "query",
       "rctoponly": "true",
       "rcdir": "older",
-      "rctype": "edit"
+      "rctype": "edit",
+      "rcstart": "now"
       
   }
 
