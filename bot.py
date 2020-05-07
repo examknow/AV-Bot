@@ -152,6 +152,8 @@ def checkRev(title, revid):
       "rvprop": "timestamp|user|comment|content",
       "rvslots": "main",
       "formatversion": "2",
+      "rvstartid": revid,
+      "rvendid": revid,
       "format": "json"
   }
 
@@ -187,9 +189,11 @@ while True:
 
   for rc in RECENTCHANGES:
       revid = str(rc['revid'])
+      title = str(rc['title'])
       if revid == lastdiff:
         pass
       lastdiff = str(rc['revid'])
+      checkRev(title, revid)
       if str(rc['comment']) in spamwords:
           t = time.localtime()
           curtime = time.strftime("%H:%M:%S", t)
