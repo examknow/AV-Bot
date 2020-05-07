@@ -15,7 +15,7 @@ class IRC:
         self.irc.send(bytes("PRIVMSG " + channel + " " + msg + "\n", "UTF-8"))
  
     def vandalMsg(self, page, user):
-        self.irc.send(bytes("PRIVMSG #SigmaBot Vandalism detected on " + page + " by the user " + user + "\n", "UTF-8"))
+        self.irc.send(bytes("PRIVMSG #SigmaBot Vandalism_detected! on " + page + " by the user " + user + "\n", "UTF-8"))
  
     def connect(self, server, port, channel, botnick, botpass, botnickpass):
         # Connect to the server
