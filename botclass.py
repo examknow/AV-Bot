@@ -28,6 +28,7 @@ class IRC:
         self.irc.send(bytes("NICKSERV IDENTIFY " + botnickpass + " " + botpass + "\n", "UTF-8"))
         print("Waiting for authentication...")
         time.sleep(20)
+        print("Identified to services. Joining channel.")
 
         # join the channel
         self.irc.send(bytes("JOIN " + channel + "\n", "UTF-8"))
