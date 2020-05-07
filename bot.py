@@ -6,7 +6,7 @@ import requests
 lastdiff = 0
 logging.basicConfig(filename='wikibot.log',level=logging.DEBUG)
 
-configfile = open('config.csv', 'r')
+configfile = open('config.csv', 'r') #format inspired by https://github.com/quirc-bot/quirc
 for line in configfile:
   setting = line.split(';')
   print(setting)
