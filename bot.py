@@ -27,9 +27,9 @@ for line in configfile:
   if setting[0] == 'ircnick':
     ircnick = setting[1]
   if setting[0] == 'ircusername':
-    botnickpass = setting[1]
+    ircusername = setting[1]
   if setting[0] == 'ircpass':
-    botpass = setting[1]
+    ircpass = setting[1]
   if setting[0] == 'spamwords':
     spamwords = setting[1]
     spamwords = spamwords.split(',')
