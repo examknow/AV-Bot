@@ -1,3 +1,4 @@
+from botclass import *
 import time
 import logging
 import requests
@@ -15,6 +16,20 @@ for line in configfile:
     flagpass = setting[1]
   if setting[0] == 'noflagpass':
     noflagpass = setting[1]
+  if setting[0] == 'useirc':
+    useirc = setting[1]
+  if setting[0] == 'ircserver':
+    ircserver = setting[1]
+  if setting[0] == 'ircport':
+    ircport = setting[1]
+  if setting[0] == 'ircchannel':
+    ircchannel = setting[1]
+  if setting[0] == 'ircnick':
+    ircnick = setting[1]
+  if setting[0] == 'ircusername:
+    botnickpass = setting[1]
+  if setting[0] == 'ircpass':
+    botpass = setting[1]
   if setting[0] == 'spamwords':
     spamwords = setting[1]
     spamwords = spamwords.split(',')
@@ -168,6 +183,8 @@ def checkRev(title, revid, user):
         print("Rolling back revision")
         revertChange(title, user)
 
+irc = IRC()
+irc.connect(ircserver, ircport, ircchannel, ircnick, ircpass, ircusername)
 
 while True:
   S = requests.Session()
