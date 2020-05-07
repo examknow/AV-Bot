@@ -139,6 +139,29 @@ def revertChange(page, user):
   DATA = R.json()
 
   print(DATA)
+  
+def checkRev(title, revid):
+  S = requests.Session()
+
+  URL = "https://test.miraheze.org/w/api.php"
+
+  PARAMS = {
+      "action": "query",
+      "prop": "revisions",
+      "titles": title,
+      "rvprop": "timestamp|user|comment|content",
+      "rvslots": "main",
+      "formatversion": "2",
+      "format": "json"
+  }
+
+  R = S.get(url=URL, params=PARAMS)
+  DATA = R.json()
+
+  PAGES = DATA["query"]["pages"]
+
+  for page in PAGES:
+      print(page["revisions"])
 
 
 while True:
