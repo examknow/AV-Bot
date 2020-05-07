@@ -163,7 +163,7 @@ def checkRev(title, revid):
   PAGES = DATA["query"]["pages"]
 
   for page in PAGES:
-      print(page["revisions"])
+      print(page["content"])
 
 
 while True:
