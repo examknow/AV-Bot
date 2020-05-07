@@ -26,7 +26,7 @@ for line in configfile:
     ircchannel = setting[1]
   if setting[0] == 'ircnick':
     ircnick = setting[1]
-  if setting[0] == 'ircusername:
+  if setting[0] == 'ircusername':
     botnickpass = setting[1]
   if setting[0] == 'ircpass':
     botpass = setting[1]
