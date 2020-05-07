@@ -190,6 +190,7 @@ else:
   print("Not connected to IRC")
   
 while True:
+  text = irc.get_response()
   S = requests.Session()
 
   URL = "https://test.miraheze.org/w/api.php"
