@@ -225,5 +225,7 @@ while True:
           logging.warning('[' + curtime + '] RevID:' + str(rc['revid']) + ' Page: ' + str(rc['title']) + ' Summary: ' + str(rc['comment']) + ' User: ' + str(rc['user']))
           rolluser = str(rc['user'])
           rollpage = str(rc['title'])
+          comment = str(rc['comment'])
           revertChange(rollpage, rolluser)
+          irc.send(ircchannel, "Vandalism detected on " + rollpage + " Revision ID: " + revid + " User: " + rolluser + " Comment : " + comment)
           warnUser(rollpage, rolluser)
