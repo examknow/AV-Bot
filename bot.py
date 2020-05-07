@@ -183,9 +183,12 @@ def checkRev(title, revid, user):
         print("Rolling back revision")
         revertChange(title, user)
 
-irc = IRC()
-irc.connect(ircserver, ircport, ircchannel, ircnick, ircpass, ircusername)
-
+if useirc == 'true':
+  irc = IRC()
+  irc.connect(ircserver, 6667, ircchannel, ircnick, ircpass, ircusername)
+else:
+  print("Not connected to IRC")
+  
 while True:
   S = requests.Session()
 
