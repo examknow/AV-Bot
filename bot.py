@@ -140,7 +140,7 @@ def revertChange(page, user):
 
   print(DATA)
   
-def checkRev(title, revid):
+def checkRev(title, revid, user):
   S = requests.Session()
 
   URL = "https://test.miraheze.org/w/api.php"
@@ -163,7 +163,10 @@ def checkRev(title, revid):
   PAGES = DATA["query"]["pages"]
 
   for page in PAGES:
-      print(page["revisions"])
+      rev = page["revisions"]
+      if 'revertme' in rev:
+        print("Rolling back revision")
+        revertChange(title, user)
 
 
 while True:
@@ -191,10 +194,11 @@ while True:
   for rc in RECENTCHANGES:
       revid = str(rc['revid'])
       title = str(rc['title'])
+      user = str(rc['title'])
       if revid == lastdiff:
         pass
       lastdiff = str(rc['revid'])
-      checkRev(title, revid)
+      checkRev(title, revid, user)
       if str(rc['comment']) in spamwords:
           t = time.localtime()
           curtime = time.strftime("%H:%M:%S", t)
